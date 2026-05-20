@@ -2,6 +2,7 @@ const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me
 
 import { motion } from 'framer-motion';
 import ActivityPulse from './ActivityPulse';
+import heroImage from '@/assets/hero.png';
 
 export default function HeroSection() {
   const scrollToArchive = () => {
@@ -12,6 +13,16 @@ export default function HeroSection() {
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background activity pulse */}
       <ActivityPulse />
+
+      {/* Decorative background image */}
+      <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none">
+        <img 
+          src={heroImage} 
+          alt="System Architecture" 
+          className="w-full h-full object-cover grayscale"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background" />
+      </div>
 
       {/* Vertical grid lines */}
       <div className="absolute inset-0 pointer-events-none">
