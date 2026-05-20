@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="sentinelBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a0a1e;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9d50ff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#00ffa3;stop-opacity:0.7" />
+    </linearGradient>
+    <filter id="sentinelGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#sentinelBg)"/>
+  
+  <!-- Grid -->
+  <g stroke="#242424" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="600" y1="0" x2="600" y2="600"/>
+  </g>
+  
+  <!-- Shield structure -->
+  <g filter="url(#sentinelGlow)">
+    <!-- Main shield -->
+    <path d="M 400,100 L 500,150 L 500,280 Q 500,380 400,450 Q 300,380 300,280 L 300,150 Z" 
+          fill="url(#shieldGrad)" stroke="#9d50ff" stroke-width="3" opacity="0.8"/>
+    
+    <!-- Inner shield layers -->
+    <path d="M 400,130 L 470,170 L 470,270 Q 470,350 400,410 Q 330,350 330,270 L 330,170 Z" 
+          fill="#0a0a0b" stroke="#00ffa3" stroke-width="2" opacity="0.6"/>
+    
+    <path d="M 400,160 L 440,190 L 440,260 Q 440,320 400,370 Q 360,320 360,260 L 360,190 Z" 
+          fill="#1a0a2e" stroke="#9d50ff" stroke-width="1.5" opacity="0.7"/>
+    
+    <!-- Center lock icon -->
+    <rect x="385" y="260" width="30" height="40" rx="4" fill="#9d50ff" opacity="0.9"/>
+    <path d="M 385,260 L 385,245 Q 385,235 400,235 Q 415,235 415,245 L 415,260" 
+          fill="none" stroke="#00ffa3" stroke-width="3"/>
+    <circle cx="400" cy="280" r="4" fill="#0a0a0b"/>
+  </g>
+  
+  <!-- eBPF probes -->
+  <g opacity="0.7">
+    <!-- Probe 1 -->
+    <circle cx="150" cy="200" r="25" fill="#1a0a2e" stroke="#9d50ff" stroke-width="2"/>
+    <text x="150" y="205" text-anchor="middle" fill="#9d50ff" font-size="10" font-family="monospace">eBPF</text>
+    
+    <!-- Probe 2 -->
+    <circle cx="650" cy="200" r="25" fill="#1a0a2e" stroke="#00ffa3" stroke-width="2"/>
+    <text x="650" y="205" text-anchor="middle" fill="#00ffa3" font-size="10" font-family="monospace">eBPF</text>
+    
+    <!-- Probe 3 -->
+    <circle cx="150" cy="400" r="25" fill="#1a0a2e" stroke="#00ffa3" stroke-width="2"/>
+    <text x="150" y="405" text-anchor="middle" fill="#00ffa3" font-size="10" font-family="monospace">eBPF</text>
+    
+    <!-- Probe 4 -->
+    <circle cx="650" cy="400" r="25" fill="#1a0a2e" stroke="#9d50ff" stroke-width="2"/>
+    <text x="650" y="405" text-anchor="middle" fill="#9d50ff" font-size="10" font-family="monospace">eBPF</text>
+  </g>
+  
+  <!-- Connection lines to shield -->
+  <g stroke-width="1.5" opacity="0.4" fill="none">
+    <line x1="175" y1="200" x2="300" y2="250" stroke="#9d50ff"/>
+    <line x1="625" y1="200" x2="500" y2="250" stroke="#00ffa3"/>
+    <line x1="175" y1="400" x2="300" y2="320" stroke="#00ffa3"/>
+    <line x1="625" y1="400" x2="500" y2="320" stroke="#9d50ff"/>
+  </g>
+  
+  <!-- Threat detection lines -->
+  <g stroke="#ff4444" stroke-width="1" opacity="0.5" fill="none">
+    <line x1="100" y1="150" x2="150" y2="200"/>
+    <line x1="700" y1="150" x2="650" y2="200"/>
+    <line x1="100" y1="450" x2="150" y2="400"/>
+    <line x1="700" y1="450" x2="650" y2="400"/>
+  </g>
+  
+  <!-- Threat indicators -->
+  <g fill="#ff4444" opacity="0.6">
+    <circle cx="100" cy="150" r="4"/>
+    <circle cx="700" cy="150" r="4"/>
+    <circle cx="100" cy="450" r="4"/>
+    <circle cx="700" cy="450" r="4"/>
+  </g>
+  
+  <!-- Policy engine -->
+  <g opacity="0.8">
+    <rect x="320" y="500" width="160" height="50" rx="8" fill="#1a0a2e" stroke="#9d50ff" stroke-width="2"/>
+    <text x="400" y="520" text-anchor="middle" fill="#9d50ff" font-size="11" font-family="monospace" font-weight="bold">POLICY</text>
+    <text x="400" y="535" text-anchor="middle" fill="#606060" font-size="9" font-family="monospace">OPA Engine</text>
+  </g>
+  
+  <!-- Security metrics -->
+  <g fill="#606060" font-size="9" font-family="monospace">
+    <text x="150" y="250" text-anchor="middle">&lt;50ms</text>
+    <text x="650" y="250" text-anchor="middle">0.02%</text>
+    <text x="150" y="450" text-anchor="middle">SOC2</text>
+    <text x="650" y="450" text-anchor="middle">ISO27K</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="580" text-anchor="middle" fill="#9d50ff" font-size="14" font-family="monospace" font-weight="bold">SENTINEL SHIELD</text>
+</svg>

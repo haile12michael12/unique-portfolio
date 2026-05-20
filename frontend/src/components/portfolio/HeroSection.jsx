@@ -123,7 +123,7 @@ export default function HeroSection() {
       {/* Hero image overlay */}
       <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block pointer-events-none">
         <img
-          src="https://media.db.com/images/public/69f8b0faedd7f62ec18a0726/c76b28bb8_generated_6e71ecdf.png"
+          src="/assets/hero-crystal-structure.svg"
           alt="Abstract crystalline data structure with ray-traced glass surfaces"
           className="w-full h-full object-cover opacity-20 mix-blend-screen"
         />
