@@ -1,8 +1,35 @@
 const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 import { appParams } from '@/lib/app-params';
+
+const createAxiosClient = ({ baseURL, headers, token, interceptResponses }) => {
+  const client = axios.create({
+    baseURL,
+    headers: {
+      ...headers,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
+
+  if (interceptResponses) {
+    client.interceptors.response.use(
+      (response) => response.data,
+      (error) => {
+        const errorData = {
+          status: error.response?.status,
+          data: error.response?.data,
+          message: error.response?.data?.message || error.message,
+        };
+        return Promise.reject(errorData);
+      }
+    );
+  }
+
+  return client;
+};
 
 const AuthContext = createContext();
 

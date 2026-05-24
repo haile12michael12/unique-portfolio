@@ -2,8 +2,8 @@ const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import ProjectCard from './ProjectCard';
-import ArchiveFilterBar, { emptyFilters, hasActiveFilters, toggleFilter } from './ArchiveFilterBar';
+import ProjectCard from '@/components/sections/ProjectCard';
+import ArchiveFilterBar, { emptyFilters, hasActiveFilters, toggleFilter } from '@/components/sections/ArchiveFilterBar';
 
 const PROJECTS = [
   {

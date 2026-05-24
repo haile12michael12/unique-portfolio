@@ -6,9 +6,12 @@ import PageNotFound from '@/lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import { ThemeProvider } from '@/lib/ThemeContext';
 import UserNotRegisteredError from '@/components/sections/UserNotRegisteredError';
-import Home from '@/features/Home';
-import Support from '@/features/Support';
-// Add page imports here
+import Home from '@/pages/Home';
+import Projects from '@/pages/Projects';
+import CaseStudies from '@/pages/CaseStudies';
+import Blog from '@/pages/Blog';
+import Contact from '@/pages/Contact';
+import Support from '@/components/sections/Support';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -37,6 +40,10 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/case-studies" element={<CaseStudies />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/support" element={<Support />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

@@ -60,7 +60,7 @@ export default function TerminalContact() {
   };
 
   return (
-    <section id="terminal" className="relative py-24 md:py-40">
+    <section id="terminal" className="py-24 border-t border-border/30">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         {/* Section header */}
         <motion.div

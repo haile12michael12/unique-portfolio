@@ -1,30 +1,42 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/lib/ThemeContext';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Command } from 'lucide-react';
+import { CommandPalette } from './CommandPalette';
 
 const NAV_ITEMS = [
-  { label: 'Overview', path: 'root/system/overview', target: 'hero' },
-  { label: 'Archive', path: 'root/projects/archive', target: 'archive' },
-  { label: 'Deep-Dive', path: 'root/case/deep_dive', target: 'casestudy' },
-  { label: 'Terminal', path: 'root/contact/terminal', target: 'terminal' },
+  { label: 'Overview', path: '/', displayPath: 'root/system/overview' },
+  { label: 'Projects', path: '/projects', displayPath: 'root/projects/archive' },
+  { label: 'Deep-Dive', path: '/case-studies', displayPath: 'root/case/deep_dive' },
+  { label: 'Blog', path: '/blog', displayPath: 'root/blog/insights' },
+  { label: 'Terminal', path: '/contact', displayPath: 'root/contact/terminal' },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(null);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [commandOpen, setCommandOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    
+    const down = (e) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setCommandOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener("keydown", down);
+    };
   }, []);
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <motion.nav
@@ -37,19 +49,19 @@ export default function Navigation() {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
         {/* System identifier */}
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
             SYS.ACTIVE
           </span>
-        </div>
+        </Link>
 
         {/* Nav links */}
         <div className="hidden md:flex items-center gap-1">
           {NAV_ITEMS.map((item, i) => (
-            <button
+            <Link
               key={item.label}
-              onClick={() => scrollTo(item.target)}
+              to={item.path}
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
               className="relative px-4 py-2 group"
@@ -63,7 +75,7 @@ export default function Navigation() {
                     exit={{ opacity: 0, y: -4 }}
                     className="font-mono text-xs text-primary"
                   >
-                    {item.path}
+                    {item.displayPath}
                   </motion.span>
                 ) : (
                   <motion.span
@@ -71,18 +83,28 @@ export default function Navigation() {
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
-                    className="font-mono text-xs text-muted-foreground tracking-wider uppercase"
+                    className={`font-mono text-xs tracking-wider uppercase ${
+                      location.pathname === item.path ? 'text-primary' : 'text-muted-foreground'
+                    }`}
                   >
                     {item.label}
                   </motion.span>
                 )}
               </AnimatePresence>
-            </button>
+            </Link>
           ))}
         </div>
 
         {/* Theme toggle + Status */}
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setCommandOpen(true)}
+            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            title="Open Command Palette (Ctrl+K)"
+          >
+            <Command className="w-4 h-4" />
+          </button>
+
           <motion.button
             onClick={toggle}
             whileTap={{ scale: 0.9 }}
@@ -109,6 +131,8 @@ export default function Navigation() {
           </div>
         </div>
       </div>
+
+      <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
     </motion.nav>
   );
 }

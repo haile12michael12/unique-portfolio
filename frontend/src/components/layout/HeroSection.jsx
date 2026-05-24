@@ -1,7 +1,7 @@
 const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
 
 import { motion } from 'framer-motion';
-import ActivityPulse from '../../features/portfolio/ActivityPulse';
+import ActivityPulse from '@/components/sections/ActivityPulse';
 import heroImage from '@/assets/hero.png';
 
 export default function HeroSection() {
@@ -57,9 +57,9 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <h1 className="font-syne text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-extrabold leading-[0.85] tracking-[-0.04em] text-foreground">
-            ALEX
+           Hailemichael 
             <br />
-            <span className="text-primary">MERCER</span>
+            <span className="text-primary">Assefa</span>
           </h1>
         </motion.div>
 
@@ -84,7 +84,7 @@ export default function HeroSection() {
               Experience
             </div>
             <div className="font-mono text-2xl md:text-3xl font-bold text-accent">
-              14+<span className="text-sm text-muted-foreground ml-1">YRS</span>
+              3+<span className="text-sm text-muted-foreground ml-1">YRS</span>
             </div>
           </div>
 
@@ -93,7 +93,7 @@ export default function HeroSection() {
               Systems Deployed
             </div>
             <div className="font-mono text-2xl md:text-3xl font-bold text-foreground">
-              47
+              7
             </div>
           </div>
         </motion.div>

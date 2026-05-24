@@ -1,6 +1,6 @@
 export default function CaseStudySection() {
   return (
-    <section className="py-20 border-t">
+    <section id="casestudy" className="py-20 border-t">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <h2 className="font-syne text-3xl font-bold mb-8">Deep Dives</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
