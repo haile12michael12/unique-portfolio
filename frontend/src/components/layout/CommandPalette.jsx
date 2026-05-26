@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CommandDialog,
@@ -17,7 +16,6 @@ import {
   Mail,
   Github,
   Linkedin,
-  Twitter,
   Moon,
   Sun,
   Terminal,
@@ -32,10 +30,7 @@ export function CommandPalette({ open, onOpenChange }) {
 
   const handleNavigate = (href) => {
     onOpenChange(false);
-    if (href.startsWith("#")) {
-      const el = document.getElementById(href.slice(1));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else if (href.startsWith("http")) {
+    if (href.startsWith("http")) {
       window.open(href, "_blank");
     } else {
       navigate(href);
@@ -78,23 +73,23 @@ export function CommandPalette({ open, onOpenChange }) {
         <CommandSeparator />
 
         <CommandGroup heading="Sections">
-          <CommandItem onSelect={() => handleNavigate("#hero")}>
+          <CommandItem onSelect={() => handleNavigate("/#hero")}>
             <Terminal className="mr-2 h-4 w-4" />
             Overview
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("#archive")}>
+          <CommandItem onSelect={() => handleNavigate("/projects#archive")}>
             <FolderGit2 className="mr-2 h-4 w-4" />
             Projects Archive
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("#casestudy")}>
+          <CommandItem onSelect={() => handleNavigate("/case-studies")}>
             <BookOpen className="mr-2 h-4 w-4" />
             Deep Dives
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("#testimonials")}>
+          <CommandItem onSelect={() => handleNavigate("/#testimonials")}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Testimonials
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("#terminal")}>
+          <CommandItem onSelect={() => handleNavigate("/contact#terminal")}>
             <Mail className="mr-2 h-4 w-4" />
             Contact Terminal
           </CommandItem>

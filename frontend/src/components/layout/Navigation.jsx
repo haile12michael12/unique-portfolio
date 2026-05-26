@@ -60,7 +60,7 @@ export default function Navigation() {
         <Link to="/" className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
-            SYS.ACTIVE
+            Hailemichael
           </span>
         </Link>
 
@@ -147,7 +147,7 @@ export default function Navigation() {
             {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
           <div className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase hidden lg:block">
-            v2.4.1 — STABLE
+           contact us
           </div>
         </div>
       </div>

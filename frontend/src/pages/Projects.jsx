@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { BrainCircuit, Gauge, RadioTower, Target } from 'lucide-react';
 import ProjectCard from '@/components/sections/projects/ProjectCard';
 import ArchiveFilterBar, { emptyFilters, hasActiveFilters, toggleFilter } from '@/components/sections/projects/ArchiveFilterBar';
-import { db } from '@/lib/db';
+import CaseStudy from '@/components/sections/projects/CaseStudy';
+import { Progress } from '@/components/ui/progress';
 
 const PROJECTS = [
   {
@@ -179,14 +181,153 @@ function projectMatchesFilters(project, filters) {
   return true;
 }
 
+const OBJECTIVES = {
+  scale: {
+    label: 'Scale',
+    icon: RadioTower,
+    signals: ['High Throughput', 'Low Latency', 'Distributed', 'Microservices', 'Go', 'Kafka'],
+  },
+  resilience: {
+    label: 'Resilience',
+    icon: Gauge,
+    signals: ['Fault Tolerance', 'Zero-Trust', 'Compliance', 'Rust', 'eBPF', 'K8s'],
+  },
+  velocity: {
+    label: 'Velocity',
+    icon: Target,
+    signals: ['Cost Reduction', 'Data Pipeline', 'Developer Tools', 'Python', 'Airflow', 'TypeScript'],
+  },
+};
+
+function calculateFit(project, objective, riskTolerance) {
+  const signals = new Set(OBJECTIVES[objective].signals);
+  const searchable = [
+    ...project.stack,
+    ...project.architecture,
+    ...project.industry,
+    ...project.challenges,
+  ];
+  const signalHits = searchable.filter(item => signals.has(item)).length;
+  const complexityBonus = Math.min(project.specs.length * 2, 12);
+  const riskBonus = project.challenges.includes('Fault Tolerance') ? 100 - riskTolerance : riskTolerance;
+
+  return Math.min(98, Math.round(48 + signalHits * 9 + complexityBonus + riskBonus * 0.16));
+}
+
+function ProjectIntelligence({ projects, onSelect }) {
+  const [objective, setObjective] = useState('scale');
+  const [riskTolerance, setRiskTolerance] = useState(58);
+
+  const rankedProjects = useMemo(() => {
+    return projects
+      .map(project => ({
+        ...project,
+        fit: calculateFit(project, objective, riskTolerance),
+      }))
+      .sort((a, b) => b.fit - a.fit);
+  }, [objective, projects, riskTolerance]);
+
+  const recommended = rankedProjects[0];
+  const ObjectiveIcon = OBJECTIVES[objective].icon;
+
+  return (
+    <section className="mb-14 border border-border/60 bg-card/40 p-5 md:p-6">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <div className="flex items-center gap-3 text-primary">
+            <BrainCircuit className="h-5 w-5" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em]">Project intelligence</span>
+          </div>
+          <h3 className="mt-4 font-syne text-2xl md:text-3xl font-bold">Match an engineering goal to the strongest case study.</h3>
+          <p className="mt-3 max-w-xl font-mono text-xs leading-6 text-muted-foreground">
+            Tune the objective and delivery risk to rank the archive by architectural fit, challenge overlap, and stack relevance.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {Object.entries(OBJECTIVES).map(([key, item]) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={key}
+                  onClick={() => setObjective(key)}
+                  className={`inline-flex items-center gap-2 border px-3 py-2 font-mono text-[11px] uppercase tracking-widest transition-colors ${
+                    objective === key
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-border/70 text-muted-foreground hover:border-primary/60 hover:text-primary'
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <label className="mt-6 block">
+            <div className="mb-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span>Delivery risk</span>
+              <span>{riskTolerance}%</span>
+            </div>
+            <input
+              type="range"
+              min="20"
+              max="90"
+              value={riskTolerance}
+              onChange={(event) => setRiskTolerance(Number(event.target.value))}
+              className="w-full accent-primary"
+            />
+          </label>
+        </div>
+
+        <div className="border border-border/60 bg-background/70 p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <ObjectiveIcon className="h-3.5 w-3.5 text-primary" />
+                Recommended module
+              </div>
+              <h4 className="mt-3 font-syne text-3xl font-bold">{recommended.title}</h4>
+            </div>
+            <div className="text-right font-mono">
+              <div className="text-3xl font-bold text-accent">{recommended.fit}%</div>
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">fit score</div>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm leading-6 text-muted-foreground">{recommended.description}</p>
+          <Progress value={recommended.fit} className="mt-5 h-1.5 bg-muted" />
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {recommended.vitals.map(vital => (
+              <div key={vital.label} className="border border-border/50 bg-card/40 p-3">
+                <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{vital.label}</div>
+                <div className="mt-1 font-mono text-sm font-bold text-accent">{vital.value}</div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={() => onSelect(recommended)}
+            className="mt-5 w-full border border-primary/60 bg-primary/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.2em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            Open recommended case study
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function ProjectsArchive({ onSelectProject }) {
   const [filters, setFilters] = useState(emptyFilters());
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const handleToggle = (groupKey, value) => {
     setFilters(prev => toggleFilter(prev, groupKey, value));
   };
 
   const handleClear = () => setFilters(emptyFilters());
+  const handleSelectProject = onSelectProject || setSelectedProject;
 
   const active = hasActiveFilters(filters);
   const filtered = PROJECTS.filter(p => projectMatchesFilters(p, filters));
@@ -230,6 +371,8 @@ export default function ProjectsArchive({ onSelectProject }) {
           Filter by architecture type, industry, or challenge — then click any module for the full deep-dive.
         </motion.p>
 
+        <ProjectIntelligence projects={PROJECTS} onSelect={handleSelectProject} />
+
         {/* Filter bar */}
         <ArchiveFilterBar filters={filters} onToggle={handleToggle} onClear={handleClear} />
 
@@ -251,7 +394,7 @@ export default function ProjectsArchive({ onSelectProject }) {
               key={project.id}
               project={{ ...project, architecture: project.architecture_desc }}
               index={i}
-              onSelect={onSelectProject}
+              onSelect={handleSelectProject}
               dimmed={active && !filtered.includes(project)}
               highlighted={active && filtered.includes(project)}
               activeFilter={null}
@@ -269,6 +412,15 @@ export default function ProjectsArchive({ onSelectProject }) {
           </motion.div>
         )}
       </div>
+
+      <AnimatePresence>
+        {!onSelectProject && selectedProject && (
+          <CaseStudy
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

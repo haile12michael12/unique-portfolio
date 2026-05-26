@@ -1,11 +1,6 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import HeroSection from '@/components/layout/HeroSection';
-import ProjectsArchive from '@/pages/Projects';
 import CaseStudySection from '@/components/sections/portfolio/CaseStudySection';
 import ArchitectureDiagram from '@/components/sections/portfolio/ArchitectureDiagram';
-import CaseStudy from '@/components/sections/projects/CaseStudy';
-import TerminalContact from '@/pages/Contact';
 import SkillGraph from '@/components/sections/portfolio/SkillGraph';
 import SystemMonolith from '@/components/sections/portfolio/SystemMonolith';
 import LocalImpact from '@/components/sections/portfolio/LocalImpact';
@@ -18,8 +13,6 @@ import SystemSimulation from '@/components/sections/portfolio/SystemSimulation';
 import { TerminalSimulation } from '@/components/sections/portfolio/TerminalSimulation';
 import { Globe3D } from '@/components/sections/portfolio/Globe3D';
 import CloneMyBrain from '@/components/sections/portfolio/CloneMyBrain';
-import BlogSection from '@/pages/Blog';
-import ArchCaseStudies from '@/pages/CaseStudies';
 import PerformanceMetrics from '@/components/sections/portfolio/PerformanceMetrics';
 import BuildInPublic from '@/components/sections/blog/BuildInPublic';
 import ExploreCodebase from '@/components/sections/portfolio/ExploreCodebase';
@@ -28,8 +21,6 @@ import Testimonials from '@/components/sections/portfolio/Testimonials';
 import Footer from '@/components/layout/Footer';
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState(null);
-
   return (
     <div className="min-h-screen bg-background text-foreground relative">
       <SystemMonolith />
@@ -46,7 +37,6 @@ export default function Home() {
           <Globe3D />
         </section>
 
-        <ProjectsArchive onSelectProject={setSelectedProject} />
         <CaseStudySection />
         <ArchitectureDiagram />
         
@@ -78,12 +68,9 @@ export default function Home() {
         <LocalImpact />
         <SkillGraph />
         <ExploreCodebase />
-        <ArchCaseStudies />
         <PerformanceMetrics />
         <BuildInPublic />
-        <BlogSection />
         <Testimonials />
-        <TerminalContact />
         <NewsletterSection />
       </main>
 
@@ -91,16 +78,6 @@ export default function Home() {
       <SupportButton />
       <PortfolioChat />
       <ExportPDF />
-
-      {/* Case Study Overlay */}
-      <AnimatePresence>
-        {selectedProject && (
-          <CaseStudy
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }
