@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
+
 export default function ArchCaseStudies() {
   return (
     <section className="py-20 border-t">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-        <h2 className="font-syne text-3xl font-bold mb-8">Architectural Patterns</h2>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 pt-16">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-syne text-3xl font-bold">Architectural Patterns</h2>
+          <Link to="/" className="font-mono text-xs text-primary hover:underline uppercase tracking-widest">Back to Overview</Link>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="p-8 border rounded-xl bg-card">
             <h3 className="font-syne text-2xl font-bold mb-4">Event-Driven Microservices</h3>

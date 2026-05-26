@@ -1,30 +1,30 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Navigation from '@/components/layout/Navigation';
 import HeroSection from '@/components/layout/HeroSection';
 import ProjectsArchive from '@/pages/Projects';
-import CaseStudySection from '@/components/sections/CaseStudySection';
-import ArchitectureDiagram from '@/components/sections/ArchitectureDiagram';
-import CaseStudy from '@/components/sections/CaseStudy';
+import CaseStudySection from '@/components/sections/portfolio/CaseStudySection';
+import ArchitectureDiagram from '@/components/sections/portfolio/ArchitectureDiagram';
+import CaseStudy from '@/components/sections/projects/CaseStudy';
 import TerminalContact from '@/pages/Contact';
-import SkillGraph from '@/components/sections/SkillGraph';
-import SystemMonolith from '@/components/sections/SystemMonolith';
-import LocalImpact from '@/components/sections/LocalImpact';
-import GitHubDeep from '@/components/sections/GitHubDeep';
-import { GitHubStats } from '@/components/sections/GitHubStats';
-import SupportButton from '@/components/sections/SupportButton';
-import PortfolioChat from '@/components/sections/PortfolioChat';
-import ExportPDF from '@/components/sections/ExportPDF';
-import SystemSimulation from '@/components/sections/SystemSimulation';
-import { TerminalSimulation } from '@/components/sections/TerminalSimulation';
-import { Globe3D } from '@/components/sections/Globe3D';
-import CloneMyBrain from '@/components/sections/CloneMyBrain';
+import SkillGraph from '@/components/sections/portfolio/SkillGraph';
+import SystemMonolith from '@/components/sections/portfolio/SystemMonolith';
+import LocalImpact from '@/components/sections/portfolio/LocalImpact';
+import GitHubDeep from '@/components/sections/github/GitHubDeep';
+import { GitHubStats } from '@/components/sections/github/GitHubStats';
+import SupportButton from '@/components/sections/support/SupportButton';
+import PortfolioChat from '@/components/sections/projects/PortfolioChat';
+import ExportPDF from '@/components/sections/shared/ExportPDF';
+import SystemSimulation from '@/components/sections/portfolio/SystemSimulation';
+import { TerminalSimulation } from '@/components/sections/portfolio/TerminalSimulation';
+import { Globe3D } from '@/components/sections/portfolio/Globe3D';
+import CloneMyBrain from '@/components/sections/portfolio/CloneMyBrain';
 import BlogSection from '@/pages/Blog';
 import ArchCaseStudies from '@/pages/CaseStudies';
-import PerformanceMetrics from '@/components/sections/PerformanceMetrics';
-import BuildInPublic from '@/components/sections/BuildInPublic';
-import ExploreCodebase from '@/components/sections/ExploreCodebase';
-import NewsletterSection from '@/components/sections/NewsletterSection';
+import PerformanceMetrics from '@/components/sections/portfolio/PerformanceMetrics';
+import BuildInPublic from '@/components/sections/blog/BuildInPublic';
+import ExploreCodebase from '@/components/sections/portfolio/ExploreCodebase';
+import NewsletterSection from '@/components/sections/blog/NewsletterSection';
+import Testimonials from '@/components/sections/portfolio/Testimonials';
 import Footer from '@/components/layout/Footer';
 
 export default function Home() {
@@ -32,7 +32,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <Navigation />
       <SystemMonolith />
 
       <main className="xl:pr-10">
@@ -83,6 +82,7 @@ export default function Home() {
         <PerformanceMetrics />
         <BuildInPublic />
         <BlogSection />
+        <Testimonials />
         <TerminalContact />
         <NewsletterSection />
       </main>

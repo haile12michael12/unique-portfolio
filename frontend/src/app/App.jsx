@@ -5,13 +5,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from '@/lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import { ThemeProvider } from '@/lib/ThemeContext';
-import UserNotRegisteredError from '@/components/sections/UserNotRegisteredError';
+import UserNotRegisteredError from '@/components/sections/shared/UserNotRegisteredError';
+import Navigation from '@/components/layout/Navigation';
 import Home from '@/pages/Home';
 import Projects from '@/pages/Projects';
 import CaseStudies from '@/pages/CaseStudies';
 import Blog from '@/pages/Blog';
 import Contact from '@/pages/Contact';
-import Support from '@/components/sections/Support';
+import Status from '@/pages/Status';
+import Support from '@/components/sections/support/Support';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -38,15 +40,21 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/projects" element={<Projects />} />
-      <Route path="/case-studies" element={<CaseStudies />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/support" element={<Support />} />
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <>
+      <Navigation />
+      <div className="pt-16">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
+    </>
   );
 };
 

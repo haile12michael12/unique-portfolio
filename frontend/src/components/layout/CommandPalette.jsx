@@ -22,6 +22,7 @@ import {
   Sun,
   Terminal,
   BookOpen,
+  MessageSquare,
 } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -68,6 +69,10 @@ export function CommandPalette({ open, onOpenChange }) {
             <Terminal className="mr-2 h-4 w-4" />
             Contact
           </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("/status")} data-testid="cmd-status">
+            <Cpu className="mr-2 h-4 w-4" />
+            Status
+          </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
@@ -84,6 +89,10 @@ export function CommandPalette({ open, onOpenChange }) {
           <CommandItem onSelect={() => handleNavigate("#casestudy")}>
             <BookOpen className="mr-2 h-4 w-4" />
             Deep Dives
+          </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("#testimonials")}>
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Testimonials
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("#terminal")}>
             <Mail className="mr-2 h-4 w-4" />
