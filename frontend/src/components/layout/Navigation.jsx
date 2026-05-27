@@ -9,9 +9,10 @@ const NAV_ITEMS = [
   { label: 'Overview', path: '/', displayPath: 'root/system/overview' },
   { label: 'Projects', path: '/projects', displayPath: 'root/projects/archive' },
   { label: 'Deep-Dive', path: '/case-studies', displayPath: 'root/case/deep_dive' },
+  { label: 'Analytics', path: '/#analytics', displayPath: 'root/system/analytics' },
   { label: 'Blog', path: '/blog', displayPath: 'root/blog/insights' },
   { label: 'Status', path: '/status', displayPath: 'root/system/status' },
-  { label: 'Contact', path: '/contact', displayPath: 'root/contact' },
+  { label: 'Contact', path: '/contact', displayPath: 'root/contact/terminal' },
 ];
 
 export default function Navigation() {
@@ -105,10 +106,19 @@ export default function Navigation() {
 
         {/* Theme toggle + Status */}
         <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 rounded-full border border-border/50 bg-background/90 px-3 py-1 text-[10px] tracking-[0.3em] text-emerald-300">
+          <Link
+            to="/status"
+            className={`hidden md:flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] tracking-[0.3em] transition-colors ${
+              location.pathname === '/status'
+                ? 'border-primary/50 bg-primary/10 text-primary'
+                : 'border-border/50 bg-background/90 text-emerald-300 hover:border-emerald-300/50'
+            }`}
+            aria-current={location.pathname === '/status' ? 'page' : undefined}
+            title={liveStatus.description}
+          >
             <ShieldCheck className="w-3 h-3 text-emerald-300" />
             <span>{liveStatus.state}</span>
-          </div>
+          </Link>
 
           <button
             onClick={() => setCommandOpen(true)}
@@ -146,9 +156,6 @@ export default function Navigation() {
           >
             {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
-          <div className="font-mono text-[10px] text-muted-foreground tracking-widest uppercase hidden lg:block">
-           contact us
-          </div>
         </div>
       </div>
 
@@ -178,7 +185,16 @@ export default function Navigation() {
               ))}
 
               <div className="border-t border-border/60 pt-4">
-                <div className="flex items-center justify-between gap-3 px-2 py-3 rounded-xl border border-border/50 bg-surface">
+                <Link
+                  to="/status"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between gap-3 rounded-xl border px-2 py-3 transition-colors ${
+                    location.pathname === '/status'
+                      ? 'border-primary/50 bg-primary/10'
+                      : 'border-border/50 bg-surface hover:border-emerald-300/50'
+                  }`}
+                  aria-current={location.pathname === '/status' ? 'page' : undefined}
+                >
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Live status</p>
                     <p className="font-semibold">{liveStatus.description}</p>
@@ -186,7 +202,7 @@ export default function Navigation() {
                   <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-emerald-300">
                     {liveStatus.state}
                   </span>
-                </div>
+                </Link>
               </div>
             </div>
           </motion.div>

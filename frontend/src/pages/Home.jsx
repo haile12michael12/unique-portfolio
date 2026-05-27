@@ -17,7 +17,8 @@ import PerformanceMetrics from '@/components/sections/portfolio/PerformanceMetri
 import BuildInPublic from '@/components/sections/blog/BuildInPublic';
 import ExploreCodebase from '@/components/sections/portfolio/ExploreCodebase';
 import NewsletterSection from '@/components/sections/blog/NewsletterSection';
-import Testimonials from '@/components/sections/portfolio/Testimonials';
+import Testimonials from '@/features/testimony/Testimonials';
+import Analytics from '@/features/analytics/Analytics';
 import Footer from '@/components/layout/Footer';
 
 export default function Home() {
@@ -65,6 +66,7 @@ export default function Home() {
         <SystemSimulation />
         <GitHubDeep />
         <GitHubStats />
+        <Analytics />
         <LocalImpact />
         <SkillGraph />
         <ExploreCodebase />

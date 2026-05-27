@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
+import HeroSignalAnimation from '@/components/animations/HeroSignalAnimation';
 import ActivityPulse from '@/components/sections/shared/ActivityPulse';
 import heroImage from '@/assets/hero.png';
-import { db } from '@/lib/db';
 
 export default function HeroSection() {
   const scrollToArchive = () => {
@@ -12,6 +12,7 @@ export default function HeroSection() {
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background activity pulse */}
       <ActivityPulse />
+      <HeroSignalAnimation />
 
       {/* Decorative background image */}
       <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none">
