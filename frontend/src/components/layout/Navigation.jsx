@@ -9,9 +9,9 @@ const NAV_ITEMS = [
   { label: 'Full-Stack', path: '/', displayPath: 'root/dev/fullstack' },
   { label: 'Solutions', path: '/projects', displayPath: 'root/dev/solutions' },
   { label: 'Architecture', path: '/case-studies', displayPath: 'root/dev/architecture' },
-  { label: 'Metrics', path: '/#analytics', displayPath: 'root/dev/performance' },
+  { label: 'Experience', path: '/#experience', displayPath: 'root/dev/history' },
   { label: 'Journal', path: '/blog', displayPath: 'root/dev/journal' },
-  { label: 'Deployment', path: '/status', displayPath: 'root/dev/deployment' },
+  { label: 'Resume', path: '/#resume', displayPath: 'root/dev/manifest' },
   { label: 'Terminal', path: '/contact', displayPath: 'root/dev/terminal' },
 ];
 

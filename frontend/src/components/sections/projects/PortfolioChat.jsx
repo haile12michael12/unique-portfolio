@@ -6,10 +6,11 @@ import ReactMarkdown from 'react-markdown';
 import { db } from '@/lib/db';
 
 const SUGGESTIONS = [
-  'Ask about my projects',
-  'Explain my architecture',
-  'What tech do I use?',
-  'Tell me about Nexus Engine',
+  'Ask about my full-stack expertise',
+  'Explain the Titan Orchestrator',
+  'How do I optimize cold starts?',
+  'Tell me about my time at Vercel/Stripe',
+  'What is my favorite tech stack?',
 ];
 
 function MessageBubble({ message }) {
@@ -87,7 +88,13 @@ export default function PortfolioChat() {
     setMessages(prev => [...prev, { role: 'user', content }]);
 
     const conv = await initConversation();
-    await db.agents.addMessage(conv, { role: 'user', content });
+    const assistantMsg = await db.agents.addMessage(conv, { role: 'user', content });
+    
+    // Manual state update for the mock assistant response
+    if (assistantMsg && assistantMsg.content) {
+      setMessages(prev => [...prev, assistantMsg]);
+    }
+    
     setLoading(false);
   };
 

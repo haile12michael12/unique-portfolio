@@ -12,6 +12,9 @@ import ExportPDF from '@/components/sections/shared/ExportPDF';
 import SystemSimulation from '@/components/sections/portfolio/SystemSimulation';
 import { TerminalSimulation } from '@/components/sections/portfolio/TerminalSimulation';
 import { Globe3D } from '@/components/sections/portfolio/Globe3D';
+import Experience from '@/components/sections/portfolio/Experience';
+import Education from '@/components/sections/portfolio/Education';
+import Resume from '@/components/sections/portfolio/Resume';
 import CloneMyBrain from '@/components/sections/portfolio/CloneMyBrain';
 import PerformanceMetrics from '@/components/sections/portfolio/PerformanceMetrics';
 import BuildInPublic from '@/components/sections/blog/BuildInPublic';
@@ -40,6 +43,8 @@ export default function Home() {
 
         <CaseStudySection />
         <ArchitectureDiagram />
+        <Experience />
+        <Education />
         
         {/* Terminal Deployment Simulation */}
         <section className="py-24 max-w-[1400px] mx-auto px-6 md:px-10">
@@ -73,6 +78,7 @@ export default function Home() {
         <PerformanceMetrics />
         <BuildInPublic />
         <Testimonials />
+        <Resume />
         <NewsletterSection />
       </main>
 

@@ -21,6 +21,7 @@ import {
   Terminal,
   BookOpen,
   MessageSquare,
+  Briefcase,
 } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -56,17 +57,21 @@ export function CommandPalette({ open, onOpenChange }) {
             <BookOpen className="mr-2 h-4 w-4" />
             System Architecture
           </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("/#experience")} data-testid="cmd-experience">
+            <Briefcase className="mr-2 h-4 w-4" />
+            Professional Experience
+          </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/blog")} data-testid="cmd-blog">
             <FileText className="mr-2 h-4 w-4" />
             Dev Journal
           </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("/#resume")} data-testid="cmd-resume">
+            <FileText className="mr-2 h-4 w-4" />
+            Core Manifest (Resume)
+          </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/contact")} data-testid="cmd-contact">
             <Terminal className="mr-2 h-4 w-4" />
             Initiate Terminal
-          </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("/status")} data-testid="cmd-status">
-            <Cpu className="mr-2 h-4 w-4" />
-            Deployment Status
           </CommandItem>
         </CommandGroup>
 
