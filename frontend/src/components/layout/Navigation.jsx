@@ -6,13 +6,13 @@ import { Sun, Moon, Command, Menu, X, ShieldCheck } from 'lucide-react';
 import { CommandPalette } from './CommandPalette';
 
 const NAV_ITEMS = [
-  { label: 'Overview', path: '/', displayPath: 'root/system/overview' },
-  { label: 'Projects', path: '/projects', displayPath: 'root/projects/archive' },
-  { label: 'Deep-Dive', path: '/case-studies', displayPath: 'root/case/deep_dive' },
-  { label: 'Analytics', path: '/#analytics', displayPath: 'root/system/analytics' },
-  { label: 'Blog', path: '/blog', displayPath: 'root/blog/insights' },
-  { label: 'Status', path: '/status', displayPath: 'root/system/status' },
-  { label: 'Contact', path: '/contact', displayPath: 'root/contact/terminal' },
+  { label: 'Full-Stack', path: '/', displayPath: 'root/dev/fullstack' },
+  { label: 'Solutions', path: '/projects', displayPath: 'root/dev/solutions' },
+  { label: 'Architecture', path: '/case-studies', displayPath: 'root/dev/architecture' },
+  { label: 'Metrics', path: '/#analytics', displayPath: 'root/dev/performance' },
+  { label: 'Journal', path: '/blog', displayPath: 'root/dev/journal' },
+  { label: 'Deployment', path: '/status', displayPath: 'root/dev/deployment' },
+  { label: 'Terminal', path: '/contact', displayPath: 'root/dev/terminal' },
 ];
 
 export default function Navigation() {

@@ -43,55 +43,51 @@ export function CommandPalette({ open, onOpenChange }) {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
 
-        <CommandGroup heading="Navigation">
+        <CommandGroup heading="Development">
           <CommandItem onSelect={() => handleNavigate("/")} data-testid="cmd-home">
             <Home className="mr-2 h-4 w-4" />
-            Home
+            Full-Stack Overview
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/projects")} data-testid="cmd-projects">
             <FolderGit2 className="mr-2 h-4 w-4" />
-            Projects
+            Solutions Archive
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/case-studies")} data-testid="cmd-case-studies">
             <BookOpen className="mr-2 h-4 w-4" />
-            Case Studies
+            System Architecture
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/blog")} data-testid="cmd-blog">
             <FileText className="mr-2 h-4 w-4" />
-            Blog
+            Dev Journal
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/contact")} data-testid="cmd-contact">
             <Terminal className="mr-2 h-4 w-4" />
-            Contact
+            Initiate Terminal
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/status")} data-testid="cmd-status">
             <Cpu className="mr-2 h-4 w-4" />
-            Status
+            Deployment Status
           </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
 
-        <CommandGroup heading="Sections">
+        <CommandGroup heading="System Sections">
           <CommandItem onSelect={() => handleNavigate("/#hero")}>
             <Terminal className="mr-2 h-4 w-4" />
-            Overview
+            Architecture Overview
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/projects#archive")}>
             <FolderGit2 className="mr-2 h-4 w-4" />
-            Projects Archive
+            Solutions Repository
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("/case-studies")}>
-            <BookOpen className="mr-2 h-4 w-4" />
-            Deep Dives
+          <CommandItem onSelect={() => handleNavigate("/#analytics")}>
+            <Cpu className="mr-2 h-4 w-4" />
+            Performance Metrics
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/#testimonials")}>
             <MessageSquare className="mr-2 h-4 w-4" />
-            Testimonials
-          </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("/contact#terminal")}>
-            <Mail className="mr-2 h-4 w-4" />
-            Contact Terminal
+            Peer Reviews
           </CommandItem>
         </CommandGroup>
 
