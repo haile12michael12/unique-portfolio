@@ -2,44 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, X, FileText, Loader2, CheckCircle } from 'lucide-react';
 import jsPDF from 'jspdf';
-
-const PROJECTS = [
-  {
-    title: 'Nexus Engine',
-    description: 'Distributed real-time transaction processing platform handling 2M+ events/sec with sub-5ms latency guarantees.',
-    stack: ['Go', 'Kafka', 'Redis', 'K8s', 'gRPC'],
-    vitals: [{ label: 'Throughput', value: '2.1M/s' }, { label: 'Latency P99', value: '4.2ms' }, { label: 'User Scale', value: '18M' }],
-    impact: 'Reduced latency by 94%, achieved 99.999% uptime, scaled to handle 40x original transaction volume.',
-  },
-  {
-    title: 'Atlas Pipeline',
-    description: 'ML-powered data pipeline orchestration framework processing 50TB+ daily across heterogeneous data sources.',
-    stack: ['Python', 'Spark', 'Airflow', 'dbt', 'Snowflake'],
-    vitals: [{ label: 'Daily Volume', value: '52TB' }, { label: 'Pipeline SLA', value: '99.97%' }, { label: 'Cost Reduction', value: '68%' }],
-    impact: 'Freed 12 engineers from maintenance. Pipeline failures dropped 94%. Data freshness 6h → 15min.',
-  },
-  {
-    title: 'Chronos Mesh',
-    description: 'Real-time collaborative editing engine with CRDTs supporting 10K+ concurrent users.',
-    stack: ['Rust', 'WebSocket', 'CRDT', 'WASM', 'React'],
-    vitals: [{ label: 'Concurrency', value: '10K+' }, { label: 'Sync Latency', value: '12ms' }, { label: 'Repo Size', value: '142K LOC' }],
-    impact: 'Zero data loss post-launch. Latency 200ms → 12ms. Support tickets dropped 82%.',
-  },
-  {
-    title: 'Sentinel Shield',
-    description: 'Zero-trust security infrastructure with runtime threat detection and compliance automation.',
-    stack: ['Rust', 'eBPF', 'Terraform', 'OPA', 'SPIFFE'],
-    vitals: [{ label: 'Threat Detection', value: '<50ms' }, { label: 'False Positives', value: '0.02%' }, { label: 'Compliance', value: 'SOC2/ISO' }],
-    impact: 'Audit 6 weeks → 2 days. SOC2 Type II + ISO 27001. Zero breaches in 3 years.',
-  },
-];
-
-const EXPERTISE = [
-  { title: 'Distributed Systems', metric: '47 systems', detail: 'Consensus protocols, event sourcing, CQRS, fault-tolerant architectures.' },
-  { title: 'Engineering Leadership', metric: '60+ engineers', detail: 'Led cross-functional teams of 8–25. Technical strategy, mentorship, culture.' },
-  { title: 'Performance Engineering', metric: '94% avg latency reduction', detail: 'Systematic profiling, algorithmic optimization, infrastructure tuning.' },
-  { title: 'Platform Architecture', metric: '3× delivery speed', detail: 'Internal dev platforms, CI/CD pipelines, infrastructure-as-code.' },
-];
+import { PDF_PROJECTS, PDF_EXPERTISE } from '@/data/shared.data';
 
 // ── Pure jsPDF renderer ─────────────────────────────────────────────────────
 function buildPDF() {
@@ -139,7 +102,7 @@ function buildPDF() {
   y += 7;
 
   const halfW = (COL - 4) / 2;
-  EXPERTISE.forEach((exp, i) => {
+  PDF_EXPERTISE.forEach((exp, i) => {
     const col = i % 2;
     const x = MARGIN + col * (halfW + 4);
     if (col === 0) checkPage(28);
@@ -187,7 +150,7 @@ function buildPDF() {
   text('PROJECTS', MARGIN, 14, '#E2E2E2');
   y += 8;
 
-  PROJECTS.forEach((proj, idx) => {
+  PDF_PROJECTS.forEach((proj, idx) => {
     checkPage(52);
 
     // Project number tag
@@ -274,7 +237,7 @@ function buildPDF() {
     y += 12;
 
     // Divider between projects
-    if (idx < PROJECTS.length - 1) {
+    if (idx < PDF_PROJECTS.length - 1) {
       setDraw('#1A1A1A');
       doc.setLineWidth(0.2);
       doc.line(MARGIN, y, W - MARGIN, y);

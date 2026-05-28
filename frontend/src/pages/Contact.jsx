@@ -124,7 +124,7 @@ export default function TerminalContact() {
                   <div className="w-2.5 h-2.5 rounded-full bg-accent/60" />
                 </div>
                 <span className="font-mono text-[10px] text-muted-foreground tracking-wider">
-                  terminal@mercer.sys
+               hailemichaelassefa5@gmail.com
                 </span>
               </div>
 

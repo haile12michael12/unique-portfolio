@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TerminalSimulation } from "@/components/TerminalSimulation";
+import { TerminalSimulation } from "@/components/sections/portfolio/TerminalSimulation";
 import { MapPin, Coffee, Zap, Code2 } from "lucide-react";
 
 const stats = [
@@ -34,7 +34,7 @@ export function About() {
           >
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                I'm a Senior Software Engineer with 8 years of experience building infrastructure,
+                I'm a Senior Software Engineer with 3 years of experience building infrastructure,
                 developer tools, and distributed systems at companies like{" "}
                 <span className="text-foreground font-medium">Google</span>,{" "}
                 <span className="text-foreground font-medium">Stripe</span>, and{" "}

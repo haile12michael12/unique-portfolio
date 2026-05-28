@@ -11,7 +11,7 @@ const PINNED_REPOS = [
     language: 'Go',
     languageColor: '#00ADD8',
     topics: ['distributed-systems', 'kafka', 'grpc', 'kubernetes'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
   {
     name: 'atlas-pipeline',
@@ -21,7 +21,7 @@ const PINNED_REPOS = [
     language: 'Python',
     languageColor: '#3572A5',
     topics: ['apache-spark', 'airflow', 'dbt', 'snowflake'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
   {
     name: 'chronos-mesh',
@@ -31,7 +31,7 @@ const PINNED_REPOS = [
     language: 'Rust',
     languageColor: '#dea584',
     topics: ['crdt', 'webassembly', 'real-time', 'collaboration'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
   {
     name: 'sentinel-shield',
@@ -41,7 +41,7 @@ const PINNED_REPOS = [
     language: 'Rust',
     languageColor: '#dea584',
     topics: ['ebpf', 'zero-trust', 'security', 'spiffe'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
   {
     name: 'amharic-dev-tools',
@@ -51,7 +51,7 @@ const PINNED_REPOS = [
     language: 'TypeScript',
     languageColor: '#3178C6',
     topics: ['amharic', 'i18n', 'developer-tools', 'ethiopia'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
   {
     name: 'low-bandwidth-ui',
@@ -61,7 +61,7 @@ const PINNED_REPOS = [
     language: 'JavaScript',
     languageColor: '#F7DF1E',
     topics: ['performance', 'offline-first', 'progressive-web-app'],
-    url: 'https://github.com',
+    url: 'https://github.com/haile12michael12',
   },
 ];
 
@@ -240,7 +240,7 @@ export default function GitHubDeep() {
           className="mt-10 flex justify-center"
         >
           <a
-            href="https://github.com"
+            href="https://github.com/haile12michael12"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs px-8 py-3 border border-border/60 hover:border-primary/60 text-muted-foreground hover:text-primary transition-colors duration-300 tracking-widest uppercase flex items-center gap-2"
