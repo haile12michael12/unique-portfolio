@@ -1,3 +1,5 @@
+import { openPortfolioChat } from '@/services/chat.service';
+
 export default function CloneMyBrain() {
   return (
     <section className="py-20 border-t">
@@ -7,7 +9,11 @@ export default function CloneMyBrain() {
           <p className="font-mono text-sm text-muted-foreground max-w-2xl mx-auto mb-8">
             Access the complete mental model of my engineering decisions, patterns, and philosophy.
           </p>
-          <button className="px-8 py-3 bg-primary text-primary-foreground font-mono text-xs uppercase tracking-widest rounded-full hover:bg-primary/90 transition-colors">
+          <button
+            type="button"
+            onClick={openPortfolioChat}
+            className="px-8 py-3 bg-primary text-primary-foreground font-mono text-xs uppercase tracking-widest rounded-full hover:bg-primary/90 transition-colors"
+          >
             Access Knowledge Base
           </button>
         </div>

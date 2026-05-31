@@ -4,6 +4,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/lib/ThemeContext';
 import { Sun, Moon, Command, Menu, X, HelpCircle, Search } from 'lucide-react';
 import { CommandPalette } from './CommandPalette';
+import Logo from '@/components/ui/Logo';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import { NAV_ITEMS, KEYBOARD_SHORTCUTS } from '@/data/navigation.data';
 
 export default function Navigation() {
@@ -37,6 +45,10 @@ export default function Navigation() {
         e.preventDefault();
         setShowShortcuts((open) => !open);
       }
+      if (e.key === "Escape") {
+        setSearchOpen(false);
+        setSearchQuery('');
+      }
     };
     document.addEventListener("keydown", down);
     
@@ -56,10 +68,10 @@ export default function Navigation() {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
-        {/* System identifier */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
+        {/* Brand logo */}
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <Logo size={28} className="transition-transform duration-300 group-hover:scale-110" />
+          <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase group-hover:text-primary transition-colors">
             Hailemichael
           </span>
         </Link>
@@ -198,6 +210,85 @@ export default function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Nav search overlay */}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="absolute top-full left-0 right-0 border-b border-border/50 bg-background/95 backdrop-blur-xl shadow-lg"
+          >
+            <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-4">
+              <div className="flex items-center gap-3 border border-border/50 px-4 py-2.5 mb-3">
+                <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+                <input
+                  autoFocus
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search pages and sections..."
+                  className="flex-1 bg-transparent outline-none font-mono text-sm text-foreground placeholder:text-muted-foreground/50"
+                />
+                <button
+                  onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                  className="font-mono text-[10px] text-muted-foreground hover:text-primary uppercase tracking-wider"
+                >
+                  Esc
+                </button>
+              </div>
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-1 max-h-64 overflow-y-auto">
+                {filteredNavItems.map((item) => {
+                  const href = item.hash ? `${item.path}${item.hash}` : item.path;
+                  return (
+                    <Link
+                      key={item.label}
+                      to={href}
+                      onClick={() => { setSearchOpen(false); setSearchQuery(''); setMobileOpen(false); }}
+                      className="flex flex-col gap-0.5 px-4 py-3 rounded-lg hover:bg-primary/5 transition-colors"
+                    >
+                      <span className="font-mono text-xs text-primary">{item.label}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground">{item.displayPath}</span>
+                    </Link>
+                  );
+                })}
+                {filteredNavItems.length === 0 && (
+                  <p className="col-span-full px-4 py-3 font-mono text-xs text-muted-foreground">No results found.</p>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Keyboard shortcuts dialog */}
+      <Dialog open={showShortcuts} onOpenChange={setShowShortcuts}>
+        <DialogContent className="max-w-md border-border/60 bg-card/95 backdrop-blur-xl">
+          <DialogHeader>
+            <DialogTitle className="font-syne text-xl">Keyboard Shortcuts</DialogTitle>
+            <DialogDescription className="font-mono text-xs">
+              Power-user navigation for the portfolio system.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2 mt-2">
+            {KEYBOARD_SHORTCUTS.map((shortcut) => (
+              <div
+                key={shortcut.key}
+                className="flex items-center justify-between gap-4 px-3 py-2.5 border border-border/40 rounded-lg"
+              >
+                <div>
+                  <p className="text-sm text-foreground">{shortcut.action}</p>
+                  <p className="font-mono text-[10px] text-muted-foreground">{shortcut.context}</p>
+                </div>
+                <kbd className="font-mono text-[10px] px-2 py-1 border border-border/60 bg-background text-primary whitespace-nowrap">
+                  {shortcut.key}
+                </kbd>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
     </motion.nav>

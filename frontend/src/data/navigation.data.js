@@ -13,6 +13,14 @@ export const NAV_ITEMS = [
     description: 'Complete overview and hero section',
   },
   {
+    label: 'Services',
+    path: '/services',
+    displayPath: 'root/dev/services',
+    category: 'work',
+    icon: 'Wrench',
+    description: 'Engineering services and engagement models',
+  },
+  {
     label: 'Solutions',
     path: '/projects',
     displayPath: 'root/dev/solutions',
@@ -74,6 +82,7 @@ export const KEYBOARD_SHORTCUTS = [
 
 export const PAGE_ROUTES = {
   home: '/',
+  services: '/services',
   projects: '/projects',
   caseStudies: '/case-studies',
   blog: '/blog',

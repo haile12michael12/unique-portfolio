@@ -22,6 +22,7 @@ import {
   BookOpen,
   MessageSquare,
   Briefcase,
+  Wrench,
 } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -48,6 +49,10 @@ export function CommandPalette({ open, onOpenChange }) {
           <CommandItem onSelect={() => handleNavigate("/")} data-testid="cmd-home">
             <Home className="mr-2 h-4 w-4" />
             Full-Stack Overview
+          </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("/services")} data-testid="cmd-services">
+            <Wrench className="mr-2 h-4 w-4" />
+            Engineering Services
           </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/projects")} data-testid="cmd-projects">
             <FolderGit2 className="mr-2 h-4 w-4" />

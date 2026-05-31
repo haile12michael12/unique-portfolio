@@ -7,7 +7,6 @@ import LocalImpact from '@/components/sections/portfolio/LocalImpact';
 import GitHubDeep from '@/components/sections/github/GitHubDeep';
 import { GitHubStats } from '@/components/sections/github/GitHubStats';
 import SupportButton from '@/components/sections/support/SupportButton';
-import PortfolioChat from '@/components/sections/projects/PortfolioChat';
 import ExportPDF from '@/components/sections/shared/ExportPDF';
 import SystemSimulation from '@/components/sections/portfolio/SystemSimulation';
 import { TerminalSimulation } from '@/components/sections/portfolio/TerminalSimulation';
@@ -84,7 +83,6 @@ export default function Home() {
 
       <Footer />
       <SupportButton />
-      <PortfolioChat />
       <ExportPDF />
     </div>
   );

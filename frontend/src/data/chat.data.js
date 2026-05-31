@@ -296,6 +296,68 @@ Communication Style:
 - Explain the 'why' behind architectural decisions
 - Be conversational but technical`;
 
+const DEFAULT_CHAT_RESPONSE = `I'm the portfolio AI assistant for **${PORTFOLIO_CONTEXT.title}**.
+
+I can help with:
+- Full-stack & distributed systems expertise
+- Projects like Nexus Engine, Atlas Pipeline, Chronos Mesh
+- Architecture patterns (CQRS, Event Sourcing, CRDTs)
+- Tech stack and infrastructure decisions
+
+Try asking about a specific project, technology, or career experience.`;
+
+function normalizeChatText(text) {
+  return text.toLowerCase().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function scoreChatMatch(userText, question) {
+  const user = normalizeChatText(userText);
+  const q = normalizeChatText(question);
+
+  if (user.includes(q) || q.includes(user)) return 100;
+
+  const userWords = new Set(user.split(' ').filter((w) => w.length > 2));
+  const qWords = q.split(' ').filter((w) => w.length > 2);
+
+  let matches = 0;
+  for (const word of qWords) {
+    if (userWords.has(word)) matches++;
+  }
+
+  return qWords.length ? (matches / qWords.length) * 80 : 0;
+}
+
+export function findChatResponse(userMessage) {
+  const text = userMessage.trim();
+  if (!text) return DEFAULT_CHAT_RESPONSE;
+
+  let bestScore = 0;
+  let bestAnswer = null;
+
+  for (const qa of CHAT_QA_PAIRS) {
+    const score = scoreChatMatch(text, qa.question);
+    if (score > bestScore) {
+      bestScore = score;
+      bestAnswer = qa.answer;
+    }
+  }
+
+  if (bestScore >= 40) return bestAnswer;
+
+  const lower = text.toLowerCase();
+  if (lower.includes('hello') || lower.includes('hi ') || lower === 'hi') {
+    return "Hey! I'm trained on this portfolio. Ask me about projects, architecture, tech stack, or professional experience.";
+  }
+  if (lower.includes('project')) {
+    return CHAT_QA_PAIRS.find((q) => q.question.includes('proud'))?.answer ?? DEFAULT_CHAT_RESPONSE;
+  }
+  if (lower.includes('contact') || lower.includes('hire') || lower.includes('email')) {
+    return "You can reach out via the **Terminal** contact page at `/contact`. Use `/hire` for opportunities or send a direct message. I'm open to senior/staff engineering and architecture roles.";
+  }
+
+  return DEFAULT_CHAT_RESPONSE;
+}
+
 export default {
   CHAT_SUGGESTIONS,
   PORTFOLIO_CONTEXT,

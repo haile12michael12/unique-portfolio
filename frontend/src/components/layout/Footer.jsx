@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Github,
   Linkedin,
@@ -7,6 +8,16 @@ import {
   Mail,
   Heart,
 } from "lucide-react";
+import Logo from "@/components/ui/Logo";
+
+const footerLinks = [
+  { label: "Home", to: "/" },
+  { label: "Projects", to: "/projects" },
+  { label: "Services", to: "/services" },
+  { label: "Experience", to: "/#experience" },
+  { label: "Blog", to: "/blog" },
+  { label: "Contact", to: "/contact" },
+];
 
 const socialLinks = [
   {
@@ -45,16 +56,17 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             className="space-y-5"
           >
-            <div>
+            <div className="flex items-center gap-3">
+              <Logo size={32} />
               <h2 className="font-syne text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                 Hailemichael Assefa
               </h2>
-
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Building modern digital experiences, scalable systems, and
-                premium software products with performance-focused engineering.
-              </p>
             </div>
+
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Building modern digital experiences, scalable systems, and
+              premium software products with performance-focused engineering.
+            </p>
 
             {/* Availability */}
             <div className="inline-flex items-center gap-3 rounded-full border border-border/50 bg-card/40 backdrop-blur-sm px-4 py-2">
@@ -81,23 +93,16 @@ export default function Footer() {
             </h3>
 
             <div className="grid grid-cols-2 gap-3">
-              {[
-                "Home",
-                "Projects",
-                "Services",
-                "Experience",
-                "About",
-                "Contact",
-              ].map((item) => (
-                <a
-                  key={item}
-                  href="#"
+              {footerLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
                   className="group flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary"
                 >
-                  <span>{item}</span>
+                  <span>{item.label}</span>
 
                   <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

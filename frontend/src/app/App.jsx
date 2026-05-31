@@ -13,9 +13,11 @@ import Projects from '@/pages/Projects';
 import CaseStudies from '@/pages/CaseStudies';
 import Blog from '@/pages/Blog';
 import Contact from '@/pages/Contact';
+import Services from '@/pages/Services';
 import Status from '@/pages/Status';
 
 import Support from '@/components/sections/support/Support';
+import PortfolioChat from '@/components/sections/projects/PortfolioChat';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -63,6 +65,7 @@ const AuthenticatedApp = () => {
       <div className="pt-16">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/blog" element={<Blog />} />
@@ -72,6 +75,7 @@ const AuthenticatedApp = () => {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
+      <PortfolioChat />
     </>
   );
 };
