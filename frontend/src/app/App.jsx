@@ -14,6 +14,7 @@ import CaseStudies from '@/pages/CaseStudies';
 import Blog from '@/pages/Blog';
 import Contact from '@/pages/Contact';
 import Services from '@/pages/Services';
+import About from '@/pages/About';
 import Status from '@/pages/Status';
 
 import Support from '@/components/sections/support/Support';
@@ -66,6 +67,7 @@ const AuthenticatedApp = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/blog" element={<Blog />} />

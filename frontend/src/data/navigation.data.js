@@ -13,6 +13,22 @@ export const NAV_ITEMS = [
     description: 'Complete overview and hero section',
   },
   {
+    label: 'About',
+    path: '/about',
+    displayPath: 'root/dev/about',
+    category: 'profile',
+    icon: 'User',
+    description: 'Career profile and credentials',
+  },
+  {
+    label: 'Terminal',
+    path: '/contact',
+    displayPath: 'root/dev/terminal',
+    category: 'contact',
+    icon: 'MessageSquare',
+    description: 'Contact and communication',
+  },
+  {
     label: 'Services',
     path: '/services',
     displayPath: 'root/dev/services',
@@ -37,38 +53,12 @@ export const NAV_ITEMS = [
     description: 'Deep-dive architecture analysis',
   },
   {
-    label: 'Experience',
-    path: '/',
-    displayPath: 'root/dev/history',
-    hash: '#experience',
-    category: 'profile',
-    icon: 'Briefcase',
-    description: 'Work experience and timeline',
-  },
-  {
     label: 'Journal',
     path: '/blog',
     displayPath: 'root/dev/journal',
     category: 'writing',
     icon: 'BookOpen',
     description: 'Technical blog posts and insights',
-  },
-  {
-    label: 'Resume',
-    path: '/',
-    displayPath: 'root/dev/manifest',
-    hash: '#resume',
-    category: 'profile',
-    icon: 'FileText',
-    description: 'CV and credentials',
-  },
-  {
-    label: 'Terminal',
-    path: '/contact',
-    displayPath: 'root/dev/terminal',
-    category: 'contact',
-    icon: 'MessageSquare',
-    description: 'Contact and communication',
   },
 ];
 
@@ -82,6 +72,7 @@ export const KEYBOARD_SHORTCUTS = [
 
 export const PAGE_ROUTES = {
   home: '/',
+  about: '/about',
   services: '/services',
   projects: '/projects',
   caseStudies: '/case-studies',
@@ -91,7 +82,7 @@ export const PAGE_ROUTES = {
 
 export const QUICK_ACCESS = [
   { label: 'GitHub', shortcut: 'gh', url: 'https://github.com' },
-  { label: 'Resume', shortcut: 'cv', hash: '#resume' },
+  { label: 'Resume', shortcut: 'cv', path: '/about#resume' },
   { label: 'Projects', shortcut: 'projects', path: '/projects' },
   { label: 'Contact', shortcut: 'email', path: '/contact' },
 ];

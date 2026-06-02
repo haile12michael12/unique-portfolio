@@ -12,9 +12,10 @@ import Logo from "@/components/ui/Logo";
 
 const footerLinks = [
   { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
   { label: "Services", to: "/services" },
-  { label: "Experience", to: "/#experience" },
+  { label: "Experience", to: "/about#experience" },
   { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
 ];

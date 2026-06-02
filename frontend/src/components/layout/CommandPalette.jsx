@@ -13,7 +13,6 @@ import {
   FolderGit2,
   FileText,
   Cpu,
-  Mail,
   Github,
   Linkedin,
   Moon,
@@ -23,6 +22,7 @@ import {
   MessageSquare,
   Briefcase,
   Wrench,
+  User,
 } from "lucide-react";
 import { useTheme } from "@/lib/ThemeContext";
 
@@ -50,6 +50,10 @@ export function CommandPalette({ open, onOpenChange }) {
             <Home className="mr-2 h-4 w-4" />
             Full-Stack Overview
           </CommandItem>
+          <CommandItem onSelect={() => handleNavigate("/about")} data-testid="cmd-about">
+            <User className="mr-2 h-4 w-4" />
+            About Profile
+          </CommandItem>
           <CommandItem onSelect={() => handleNavigate("/services")} data-testid="cmd-services">
             <Wrench className="mr-2 h-4 w-4" />
             Engineering Services
@@ -62,7 +66,7 @@ export function CommandPalette({ open, onOpenChange }) {
             <BookOpen className="mr-2 h-4 w-4" />
             System Architecture
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("/#experience")} data-testid="cmd-experience">
+          <CommandItem onSelect={() => handleNavigate("/about#experience")} data-testid="cmd-experience">
             <Briefcase className="mr-2 h-4 w-4" />
             Professional Experience
           </CommandItem>
@@ -70,7 +74,7 @@ export function CommandPalette({ open, onOpenChange }) {
             <FileText className="mr-2 h-4 w-4" />
             Dev Journal
           </CommandItem>
-          <CommandItem onSelect={() => handleNavigate("/#resume")} data-testid="cmd-resume">
+          <CommandItem onSelect={() => handleNavigate("/about#resume")} data-testid="cmd-resume">
             <FileText className="mr-2 h-4 w-4" />
             Core Manifest (Resume)
           </CommandItem>
