@@ -121,6 +121,13 @@ export default function Navigation() {
 
         {/* Theme toggle + Advanced features */}
         <div className="flex items-center gap-3">
+          <Link
+            to="/support"
+            className="hidden md:inline-flex items-center px-3 py-1.5 border border-primary/40 text-primary hover:bg-primary/10 transition-colors font-mono text-[10px] tracking-widest uppercase"
+            title="Support page"
+          >
+            Support
+          </Link>
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             className="hidden md:flex p-2 text-muted-foreground hover:text-primary transition-colors"
